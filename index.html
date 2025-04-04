@@ -1,122 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dojee - The GOAT of Homework</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e1b3a, #2c2a52);
+      font-family: 'Kanit', sans-serif;
+      background: linear-gradient(135deg, #0c0f1a, #1a1e29);
       color: white;
       overflow-x: hidden;
     }
 
     header {
       padding: 2rem;
-      background-color: #2b275c;
+      background-color: #0e1a2b;
       text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     header h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       margin: 0;
+      color: gold;
     }
 
     header p {
       margin-top: 0.5rem;
       font-style: italic;
-      font-size: 1.1rem;
-      color: #ccc;
+      font-size: 1.3rem;
+      color: #aaa;
     }
 
     .container {
       padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       text-align: center;
     }
 
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 2rem;
-      width: 100%;
-      max-width: 700px;
+    .menu-path {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
     }
 
-    .menu button {
-      background: #4f45b4;
-      border: none;
-      padding: 1.2rem;
-      color: white;
-      font-size: 1.2rem;
-      border-radius: 1rem;
+    .lesson-node {
+      background: #002147;
+      padding: 2rem;
+      border-radius: 40px;
+      color: gold;
+      font-size: 1.3rem;
+      min-width: 160px;
+      height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
-    .menu button:hover {
-      background: #675be3;
-      transform: scale(1.05);
+    .lesson-node:hover {
+      background: #011d3a;
+      transform: scale(1.07);
     }
 
     .speech-bubble {
-      margin-top: 2rem;
-      background: white;
+      margin-top: 2.5rem;
+      background: #fff;
       color: #111;
-      border-radius: 1rem;
-      padding: 1rem 2rem;
-      max-width: 500px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      border-radius: 1.5rem;
+      padding: 1.5rem 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
       font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    .vip-banner {
-      margin-top: 2rem;
-      background-color: #ff4444;
-      padding: 1rem;
-      border-radius: 10px;
-      font-weight: bold;
+      font-size: 1.3rem;
     }
 
     .streak {
       margin-top: 2rem;
-      background: #ffcc00;
+      background: gold;
       color: black;
-      padding: 1rem;
-      border-radius: 10px;
+      padding: 1.2rem;
+      border-radius: 15px;
       font-weight: bold;
-    }
-
-    .lesson-area {
-      display: none;
-      background: rgba(255,255,255,0.1);
-      padding: 2rem;
-      border-radius: 1rem;
-      margin-top: 2rem;
-      width: 90%;
-      max-width: 700px;
-    }
-
-    .question {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .answer-input {
-      padding: 0.5rem;
       font-size: 1.2rem;
-      border-radius: 0.5rem;
-      border: none;
-      width: 100%;
-      max-width: 400px;
-      margin-bottom: 1rem;
+    }
+
+    .hearts-bar {
+      margin-top: 1rem;
+      font-size: 1.8rem;
+    }
+
+    .progress-container {
+      background: #444;
+      border-radius: 30px;
+      overflow: hidden;
+      height: 30px;
+      width: 80%;
+      margin: 1.5rem auto;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: gold;
+      width: 0%;
+      transition: width 0.3s;
     }
   </style>
 </head>
@@ -125,87 +120,80 @@
     <h1>Dojee the Dramatic Goat</h1>
     <p>He’s got sass, style, and serious study skills.</p>
   </header>
-
   <div class="container">
     <div class="speech-bubble" id="dojeeSpeech">
       "If you skip studying again... I'm writing a poem about your failure."
     </div>
-
     <div class="streak" id="streakCounter">🔥 Streak: 0 days</div>
-
-    <div class="menu">
-      <button onclick="startLesson('math')">Math</button>
-      <button onclick="startLesson('english')">English</button>
-      <button onclick="startLesson('reading')">Reading</button>
+    <div class="hearts-bar" id="hearts">❤️❤️❤️❤️❤️</div>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <div class="vip-banner">
-      VIP Users Get: Unlimited Lessons + Study Games
-    </div>
-
-    <div class="lesson-area" id="lessonArea">
-      <div class="question" id="questionText"></div>
-      <input class="answer-input" id="answerInput" placeholder="Type your answer...">
-      <button onclick="submitAnswer()">Submit</button>
+    <div class="menu-path">
+      <div class="lesson-node" onclick="startLesson('math')">Math</div>
+      <div class="lesson-node" onclick="startLesson('english')">English</div>
+      <div class="lesson-node" onclick="startLesson('reading')">Reading</div>
+      <div class="lesson-node" onclick="unlockVIP()">VIP</div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <audio id="successSound" src="success.mp3"></audio>
+  <audio id="failSound" src="fail.mp3"></audio>
+  <audio id="trumpetSound" src="trumpet.mp3"></audio>
+
   <script>
     let streak = localStorage.getItem('dojeeStreak') || 0;
-    document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak} day${streak == 1 ? '' : 's'}`;
+    let lastStudyDate = localStorage.getItem('dojeeLastStudy') || null;
+    let hearts = parseInt(localStorage.getItem('dojeeHearts')) || 5;
+    let isVIP = localStorage.getItem('dojeeVIP') === 'true';
+
+    const today = new Date().toISOString().split('T')[0];
+
+    function updateHearts() {
+      const display = isVIP ? '♾️' : '❤️'.repeat(hearts);
+      document.getElementById('hearts').innerText = display;
+      if (!isVIP && hearts <= 0) {
+        document.getElementById('dojeeSpeech').innerText = "You're out of hearts! No more studying for today.";
+      }
+    }
+
+    function updateStreakDisplay() {
+      document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak} day${streak == 1 ? '' : 's'}`;
+    }
+
+    if (lastStudyDate !== today) {
+      lastStudyDate = today;
+      localStorage.setItem('dojeeLastStudy', today);
+    }
+
+    updateStreakDisplay();
+    updateHearts();
 
     function increaseStreak() {
       streak++;
       localStorage.setItem('dojeeStreak', streak);
-      document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak} day${streak == 1 ? '' : 's'}`;
+      localStorage.setItem('dojeeLastStudy', today);
+      updateStreakDisplay();
     }
-
-    const questions = {
-      math: Array.from({ length: 30 }, (_, i) => `Math Q${i + 1}: What is ${i + 1} + ${i + 2}?`),
-      english: Array.from({ length: 30 }, (_, i) => `English Q${i + 1}: Fill in the blank for sentence ${i + 1}`),
-      reading: Array.from({ length: 30 }, (_, i) => `Reading Q${i + 1}: What is the main idea of passage ${i + 1}?`)
-    };
-
-    let currentSubject = '';
-    let currentIndex = 0;
 
     function startLesson(subject) {
-      let progress = JSON.parse(localStorage.getItem('dojeeProgress')) || { math: 0, english: 0, reading: 0 };
-      if (progress[subject] >= 30) {
-        Swal.fire('Nope!', 'STOP! You’ve reached your 30 questions for today. Upgrade to VIP for more!', 'warning');
-        document.getElementById('dojeeSpeech').innerText = "STOP! You’ve reached your 30 questions for today. Upgrade to VIP for more!";
+      if (!isVIP && hearts <= 0) {
+        document.getElementById('dojeeSpeech').innerText = "No hearts left! Come back tomorrow or go VIP.";
+        document.getElementById('failSound').play();
         return;
       }
-      currentSubject = subject;
-      currentIndex = progress[subject];
-      document.getElementById('lessonArea').style.display = 'block';
-      document.getElementById('questionText').innerText = questions[subject][currentIndex] || "You're done for today!";
+      document.getElementById('dojeeSpeech').innerText = `Starting your ${subject} lesson! Time to slay.`;
+      document.getElementById('successSound').play();
+      increaseStreak();
+      window.location.href = `${subject}-lesson.html`;
     }
 
-    function submitAnswer() {
-      let input = document.getElementById('answerInput').value.trim();
-      if (!input) return;
-
-      let progress = JSON.parse(localStorage.getItem('dojeeProgress')) || { math: 0, english: 0, reading: 0 };
-      progress[currentSubject]++;
-      localStorage.setItem('dojeeProgress', JSON.stringify(progress));
-      increaseStreak();
-
-      let goodResponses = ["WOOHOOO WAY TO POWER THROUGH!", "YESSSS GOAT MODE!", "YOU’RE SLAYING THIS LESSON!", "You’re on FIRE!"];
-      let badResponses = ["uhhm... Study much?", "That one was rough. Try again, superstar!", "You good? That was kinda off.", "Let’s pretend that didn’t happen."];
-
-      const randomResponse = Math.random() > 0.5 ? goodResponses : badResponses;
-      document.getElementById('dojeeSpeech').innerText = randomResponse[Math.floor(Math.random() * randomResponse.length)];
-
-      currentIndex++;
-      if (currentIndex >= 30) {
-        document.getElementById('questionText').innerText = "You're done for today! Upgrade to VIP for more.";
-        document.getElementById('lessonArea').style.display = 'none';
-      } else {
-        document.getElementById('questionText').innerText = questions[currentSubject][currentIndex] || "Good job!";
-        document.getElementById('answerInput').value = '';
-      }
+    function unlockVIP() {
+      isVIP = true;
+      localStorage.setItem('dojeeVIP', 'true');
+      document.getElementById('dojeeSpeech').innerText = "WOOHOO VIP activated! You now have unlimited hearts & AI access.";
+      updateHearts();
     }
   </script>
 </body>
