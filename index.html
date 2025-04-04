@@ -1,77 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dojee's Learning Hub</title>
-  <style>
-    body {
-      background-color: #1a1a2e;
-      color: white;
-      font-family: sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    .menu {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 50px;
-    }
-    .menu button {
-      background: #e94560;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 20px;
-      margin: 10px;
-      border-radius: 15px;
-      cursor: pointer;
-      width: 250px;
-    }
-    .menu button:hover {
-      background: #ff2e63;
-    }
-    .streak {
-      font-size: 18px;
-      margin-top: 20px;
-    }
-    #dojeePopup {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #0f3460;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 10px black;
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojee - Learn & Conquer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c3c;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .streak {
+            background: #ffcc00;
+            color: black;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .menu {
+            margin-top: 20px;
+        }
+        .menu button {
+            background-color: #4c5c9c;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            margin: 10px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .menu button:hover {
+            background-color: #6b7ac9;
+        }
+        .speech-bubble {
+            background: white;
+            color: black;
+            padding: 15px;
+            display: inline-block;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .vip-banner {
+            background: #ff4444;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <h1>📚 Dojee's Learning Hub</h1>
-  <p>"Pick a subject! But choose wisely... I *am* judging you." 😏</p>
-
-  <div class="menu">
-    <button onclick="startLesson('math')">➕ Math</button>
-    <button onclick="startLesson('english')">🔤 English</button>
-    <button onclick="startLesson('reading')">📖 Reading</button>
-  </div>
-
-  <p class="streak">🔥 Streak: <span id="streakCount">0</span> days</p>
-
-  <div id="dojeePopup">🐐 "Time to study, darling!"</div>
-
-  <script>
-    function startLesson(subject) {
-      window.location.href = subject + '.html';
-    }
-
-    function showDojeeMessage(message) {
-      let popup = document.getElementById('dojeePopup');
-      popup.innerHTML = "🐐 " + message;
-      popup.style.display = "block";
-      setTimeout(() => { popup.style.display = "none"; }, 3000);
-    }
-    showDojeeMessage("Don't break your streak!");
-  </script>
+    <div class="container">
+        <h1>Dojee - Your Sassy Study Buddy</h1>
+        <div class="streak">🔥 Streak: 0 Days</div>
+        <div class="menu">
+            <button onclick="location.href='math.html'">Math</button>
+            <button onclick="location.href='english.html'">English</button>
+            <button onclick="location.href='reading.html'">Reading</button>
+        </div>
+        <div class="speech-bubble">"Don't break your streak, or else!"</div>
+        <div class="vip-banner">Get VIP for Unlimited Lessons & Study Games!</div>
+    </div>
 </body>
 </html>
