@@ -113,7 +113,7 @@
     <div class="lesson-button" onclick="startLesson('math')">Math</div>
     <div class="lesson-button" onclick="startLesson('english')">English</div>
     <div class="lesson-button" onclick="startLesson('reading')">Reading</div>
-    <div class="lesson-button" onclick="unlockVIP()">VIP</div>
+    <div class="lesson-button" onclick="showVIPComingSoon()">VIP</div>
   </div>
 
   <audio id="successSound" src="success.mp3"></audio>
@@ -121,12 +121,14 @@
   <audio id="trumpetSound" src="trumpet.mp3"></audio>
 
   <script>
-    let streak = localStorage.getItem('dojeeStreak') || 0;
+    let streak = parseInt(localStorage.getItem('dojeeStreak')) || 0;
     let lastStudyDate = localStorage.getItem('dojeeLastStudy') || null;
     let hearts = parseInt(localStorage.getItem('dojeeHearts')) || 5;
     let isVIP = localStorage.getItem('dojeeVIP') === 'true';
 
-    const today = new Date().toISOString().split('T')[0];
+    function getTodayDate() {
+      return new Date().toISOString().split('T')[0];
+    }
 
     function updateHearts() {
       const display = isVIP ? '♾️' : '❤️'.repeat(hearts);
@@ -137,22 +139,29 @@
     }
 
     function updateStreakDisplay() {
-      document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak} day${streak == 1 ? '' : 's'}`;
+      document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak} day${streak === 1 ? '' : 's'}`;
     }
 
+    function updateProgressBar(percentage) {
+      document.getElementById('progressBar').style.width = percentage + '%';
+    }
+
+    const today = getTodayDate();
     if (lastStudyDate !== today) {
-      lastStudyDate = today;
-      localStorage.setItem('dojeeLastStudy', today);
+      hearts = 5;
+      localStorage.setItem('dojeeHearts', hearts);
     }
 
     updateStreakDisplay();
     updateHearts();
 
     function increaseStreak() {
-      streak++;
-      localStorage.setItem('dojeeStreak', streak);
-      localStorage.setItem('dojeeLastStudy', today);
-      updateStreakDisplay();
+      if (lastStudyDate !== today) {
+        streak++;
+        localStorage.setItem('dojeeStreak', streak);
+        localStorage.setItem('dojeeLastStudy', today);
+        updateStreakDisplay();
+      }
     }
 
     function startLesson(subject) {
@@ -161,18 +170,21 @@
         document.getElementById('failSound').play();
         return;
       }
+
       document.getElementById('dojeeSpeech').innerText = `Starting your ${subject} lesson! Time to slay.`;
       document.getElementById('successSound').play();
       increaseStreak();
+      if (!isVIP) {
+        hearts = Math.max(hearts - 1, 0);
+        localStorage.setItem('dojeeHearts', hearts);
+      }
+      updateHearts();
+      updateProgressBar(33); // You can change this logic to match lesson progress
       window.location.href = `${subject}-lesson.html`;
     }
 
-    function unlockVIP() {
-      isVIP = true;
-      localStorage.setItem('dojeeVIP', 'true');
-      document.getElementById('dojeeSpeech').innerText = "WOOHOO VIP activated! You now have unlimited hearts & AI access.";
-      document.getElementById('vipStatus').innerText = '👑 VIP';
-      updateHearts();
+    function showVIPComingSoon() {
+      document.getElementById('dojeeSpeech').innerText = "VIP coming soon! You'll be able to slay with AI soon.";
     }
   </script>
 </body>
