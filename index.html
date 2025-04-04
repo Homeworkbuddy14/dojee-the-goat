@@ -150,6 +150,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     let streak = localStorage.getItem('dojeeStreak') || 0;
     document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak} day${streak == 1 ? '' : 's'}`;
@@ -161,24 +162,9 @@
     }
 
     const questions = {
-      math: [
-        'What is 12 + 7?', 'What is 15 x 3?', 'What is 100 ÷ 4?',
-        'What is 8²?', 'What is the square root of 144?',
-        'Solve: 3x = 12', 'What is 25% of 200?', 'What is 10³?',
-        'What is 90 - 17?', 'What is the LCM of 4 and 5?',
-        // add 20 more here to make 30
-      ],
-      english: [
-        'What is a synonym for "happy"?', 'Fill in the blank: She ___ to the store.',
-        'What is the past tense of "go"?', 'Identify the verb: The dog barked loudly.',
-        'What’s the opposite of "hot"?', 'What is a noun?',
-        // add more to make 30
-      ],
-      reading: [
-        'What is the main idea?', 'What is a character trait?', 'Define the word "predict".',
-        'What does "summary" mean?', 'What is the setting of a story?',
-        // add more to make 30
-      ]
+      math: Array.from({ length: 30 }, (_, i) => `Math Q${i + 1}: What is ${i + 1} + ${i + 2}?`),
+      english: Array.from({ length: 30 }, (_, i) => `English Q${i + 1}: Fill in the blank for sentence ${i + 1}`),
+      reading: Array.from({ length: 30 }, (_, i) => `Reading Q${i + 1}: What is the main idea of passage ${i + 1}?`)
     };
 
     let currentSubject = '';
@@ -187,6 +173,7 @@
     function startLesson(subject) {
       let progress = JSON.parse(localStorage.getItem('dojeeProgress')) || { math: 0, english: 0, reading: 0 };
       if (progress[subject] >= 30) {
+        Swal.fire('Nope!', 'STOP! You’ve reached your 30 questions for today. Upgrade to VIP for more!', 'warning');
         document.getElementById('dojeeSpeech').innerText = "STOP! You’ve reached your 30 questions for today. Upgrade to VIP for more!";
         return;
       }
@@ -205,13 +192,11 @@
       localStorage.setItem('dojeeProgress', JSON.stringify(progress));
       increaseStreak();
 
-      let responses = [
-        "WOOHOOO WAY TO POWER THROUGH!",
-        "uhhm... Study much?",
-        "That one was rough. Try again, superstar!",
-        "Keep going, brainiac!"
-      ];
-      document.getElementById('dojeeSpeech').innerText = responses[Math.floor(Math.random() * responses.length)];
+      let goodResponses = ["WOOHOOO WAY TO POWER THROUGH!", "YESSSS GOAT MODE!", "YOU’RE SLAYING THIS LESSON!", "You’re on FIRE!"];
+      let badResponses = ["uhhm... Study much?", "That one was rough. Try again, superstar!", "You good? That was kinda off.", "Let’s pretend that didn’t happen."];
+
+      const randomResponse = Math.random() > 0.5 ? goodResponses : badResponses;
+      document.getElementById('dojeeSpeech').innerText = randomResponse[Math.floor(Math.random() * randomResponse.length)];
 
       currentIndex++;
       if (currentIndex >= 30) {
