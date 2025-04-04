@@ -1,13 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dojee the Dramatic Goat</title>
+  <title>Dojee's Learning Hub</title>
+  <style>
+    body {
+      background-color: #1a1a2e;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .menu button {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      margin: 10px;
+      border-radius: 15px;
+      cursor: pointer;
+      width: 250px;
+    }
+    .menu button:hover {
+      background: #ff2e63;
+    }
+    .streak {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    #dojeePopup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0f3460;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px black;
+      display: none;
+    }
+  </style>
 </head>
-<body style="background-color:#1a1a2e; color:white; font-family:sans-serif; text-align:center;">
-  <h1>🐐 Dojee the Dramatic Goat</h1>
-  <p>“If you skip studying again... I’m writing a poem about your failure.”</p>
+<body>
+  <h1>📚 Dojee's Learning Hub</h1>
+  <p>"Pick a subject! But choose wisely... I *am* judging you." 😏</p>
 
-  <a href="lessons.html" style="color:lightblue;">📚 Start Lessons</a><br>
-  <a href="vip.html" style="color:lightblue;">🔒 VIP Area</a>
+  <div class="menu">
+    <button onclick="startLesson('math')">➕ Math</button>
+    <button onclick="startLesson('english')">🔤 English</button>
+    <button onclick="startLesson('reading')">📖 Reading</button>
+  </div>
+
+  <p class="streak">🔥 Streak: <span id="streakCount">0</span> days</p>
+
+  <div id="dojeePopup">🐐 "Time to study, darling!"</div>
+
+  <script>
+    function startLesson(subject) {
+      window.location.href = subject + '.html';
+    }
+
+    function showDojeeMessage(message) {
+      let popup = document.getElementById('dojeePopup');
+      popup.innerHTML = "🐐 " + message;
+      popup.style.display = "block";
+      setTimeout(() => { popup.style.display = "none"; }, 3000);
+    }
+    showDojeeMessage("Don't break your streak!");
+  </script>
 </body>
 </html>
