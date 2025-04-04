@@ -1,82 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dojee - Learn & Conquer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1c1c3c;
-            color: white;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        .streak {
-            background: #ffcc00;
-            color: black;
-            padding: 10px;
-            display: inline-block;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-        .menu {
-            margin-top: 20px;
-        }
-        .menu button {
-            background-color: #4c5c9c;
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            margin: 10px;
-            font-size: 1.2em;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .menu button:hover {
-            background-color: #6b7ac9;
-        }
-        .speech-bubble {
-            background: white;
-            color: black;
-            padding: 15px;
-            display: inline-block;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        .vip-banner {
-            background: #ff4444;
-            color: white;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dojee - The GOAT of Homework</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e1b3a, #2c2a52);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 2rem;
+      background-color: #2b275c;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+
+    .container {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .menu button {
+      background: #4f45b4;
+      border: none;
+      padding: 1.2rem;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .menu button:hover {
+      background: #675be3;
+      transform: scale(1.05);
+    }
+
+    .speech-bubble {
+      margin-top: 2rem;
+      background: white;
+      color: #111;
+      border-radius: 1rem;
+      padding: 1rem 2rem;
+      max-width: 500px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .vip-banner {
+      margin-top: 2rem;
+      background-color: #ff4444;
+      padding: 1rem;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .streak {
+      margin-top: 2rem;
+      background: #ffcc00;
+      color: black;
+      padding: 1rem;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .lesson-area {
+      display: none;
+      background: rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 1rem;
+      margin-top: 2rem;
+      width: 90%;
+      max-width: 700px;
+    }
+
+    .question {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .answer-input {
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      border-radius: 0.5rem;
+      border: none;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Dojee - Your Sassy Study Buddy</h1>
-        <div class="streak">🔥 Streak: 0 Days</div>
-        <div class="menu">
-            <button onclick="location.href='math.html'">Math</button>
-            <button onclick="location.href='english.html'">English</button>
-            <button onclick="location.href='reading.html'">Reading</button>
-        </div>
-        <div class="speech-bubble">"Don't break your streak, or else!"</div>
-        <div class="vip-banner">Get VIP for Unlimited Lessons & Study Games!</div>
+  <header>
+    <h1>Dojee the Dramatic Goat</h1>
+    <p>He’s got sass, style, and serious study skills.</p>
+  </header>
+
+  <div class="container">
+    <div class="speech-bubble" id="dojeeSpeech">
+      "If you skip studying again... I'm writing a poem about your failure."
     </div>
+
+    <div class="streak" id="streakCounter">🔥 Streak: 0 days</div>
+
+    <div class="menu">
+      <button onclick="startLesson('math')">Math</button>
+      <button onclick="startLesson('english')">English</button>
+      <button onclick="startLesson('reading')">Reading</button>
+    </div>
+
+    <div class="vip-banner">
+      VIP Users Get: Unlimited Lessons + Study Games
+    </div>
+
+    <div class="lesson-area" id="lessonArea">
+      <div class="question" id="questionText"></div>
+      <input class="answer-input" id="answerInput" placeholder="Type your answer...">
+      <button onclick="submitAnswer()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    let streak = localStorage.getItem('dojeeStreak') || 0;
+    document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak} day${streak == 1 ? '' : 's'}`;
+
+    function increaseStreak() {
+      streak++;
+      localStorage.setItem('dojeeStreak', streak);
+      document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak} day${streak == 1 ? '' : 's'}`;
+    }
+
+    const questions = {
+      math: [
+        'What is 12 + 7?', 'What is 15 x 3?', 'What is 100 ÷ 4?',
+        'What is 8²?', 'What is the square root of 144?',
+        'Solve: 3x = 12', 'What is 25% of 200?', 'What is 10³?',
+        'What is 90 - 17?', 'What is the LCM of 4 and 5?',
+        // add 20 more here to make 30
+      ],
+      english: [
+        'What is a synonym for "happy"?', 'Fill in the blank: She ___ to the store.',
+        'What is the past tense of "go"?', 'Identify the verb: The dog barked loudly.',
+        'What’s the opposite of "hot"?', 'What is a noun?',
+        // add more to make 30
+      ],
+      reading: [
+        'What is the main idea?', 'What is a character trait?', 'Define the word "predict".',
+        'What does "summary" mean?', 'What is the setting of a story?',
+        // add more to make 30
+      ]
+    };
+
+    let currentSubject = '';
+    let currentIndex = 0;
+
+    function startLesson(subject) {
+      let progress = JSON.parse(localStorage.getItem('dojeeProgress')) || { math: 0, english: 0, reading: 0 };
+      if (progress[subject] >= 30) {
+        document.getElementById('dojeeSpeech').innerText = "STOP! You’ve reached your 30 questions for today. Upgrade to VIP for more!";
+        return;
+      }
+      currentSubject = subject;
+      currentIndex = progress[subject];
+      document.getElementById('lessonArea').style.display = 'block';
+      document.getElementById('questionText').innerText = questions[subject][currentIndex] || "You're done for today!";
+    }
+
+    function submitAnswer() {
+      let input = document.getElementById('answerInput').value.trim();
+      if (!input) return;
+
+      let progress = JSON.parse(localStorage.getItem('dojeeProgress')) || { math: 0, english: 0, reading: 0 };
+      progress[currentSubject]++;
+      localStorage.setItem('dojeeProgress', JSON.stringify(progress));
+      increaseStreak();
+
+      let responses = [
+        "WOOHOOO WAY TO POWER THROUGH!",
+        "uhhm... Study much?",
+        "That one was rough. Try again, superstar!",
+        "Keep going, brainiac!"
+      ];
+      document.getElementById('dojeeSpeech').innerText = responses[Math.floor(Math.random() * responses.length)];
+
+      currentIndex++;
+      if (currentIndex >= 30) {
+        document.getElementById('questionText').innerText = "You're done for today! Upgrade to VIP for more.";
+        document.getElementById('lessonArea').style.display = 'none';
+      } else {
+        document.getElementById('questionText').innerText = questions[currentSubject][currentIndex] || "Good job!";
+        document.getElementById('answerInput').value = '';
+      }
+    }
+  </script>
 </body>
 </html>
