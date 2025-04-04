@@ -2,22 +2,59 @@
 <html>
 <head>
   <title>Dojee's Lessons</title>
+  <style>
+    body {
+      background-color: #1a1a2e;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .question-box {
+      background: #0f3460;
+      padding: 20px;
+      border-radius: 15px;
+      width: 60%;
+      margin: 20px auto;
+      box-shadow: 2px 2px 10px black;
+    }
+    button {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ff2e63;
+    }
+    .message {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
 </head>
-<body style="background-color:#1a1a2e; color:white; font-family:sans-serif; text-align:center; padding: 50px;">
-  
+<body>
+
   <h1>📚 Dojee's Drama School</h1>
-  <p>"Uhhm... Study much?"</p>
+  <p>"If you fail this, I *will* be judging you." 😏</p>
 
-  <hr style="margin: 30px 0;">
+  <div class="question-box">
+    <h2>🧠 Question 1:</h2>
+    <p>What’s 7 x 6?</p>
+    <button onclick="checkAnswer(this, true)">42</button>
+    <button onclick="checkAnswer(this, false)">36</button>
+    <button onclick="checkAnswer(this, false)">48</button>
+    <p class="message"></p>
+  </div>
 
-  <h3>🧠 Question 1:</h3>
-  <p>What’s 7 x 6?</p>
-  <button onclick="alert('Correct! WOOHOOO WAY TO POWER THROUGH 💪')">42</button>
-  <button onclick="alert('Uhhm... Study much? 😒')">36</button>
-  <button onclick="alert('Try again, sweetie. 🙄')">48</button>
-
-  <br><br>
-  <a href="index.html" style="color:lightblue;">← Back to Home</a>
-
-</body>
-</html>
+  <div class="question-box">
+    <h2>📝 Question 2:</h2>
+    <p>What’s the past tense of ‘run’?</p>
+    <button onclick="checkAnswer(this, false)">runned</button>
+    <button onclick="checkAnswer(this, false)">runneded</button>
+    <button onclick="checkAnswer(this, true)">ran</button>
