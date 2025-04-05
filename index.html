@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap">
   <style>
+    /* Duolingo-inspired theme: navy blue, gold, and black */
     body {
       margin: 0;
       font-family: 'Kanit', sans-serif;
@@ -14,20 +15,49 @@
       color: white;
       overflow-x: hidden;
     }
-
     header {
       background-color: #001d3d;
       padding: 1.5rem;
       text-align: center;
       border-bottom: 5px solid gold;
     }
-
     header h1 {
       font-size: 2.5rem;
       color: gold;
       margin: 0;
     }
-
+    .status-bar {
+      display: flex;
+      justify-content: space-around;
+      padding: 1rem;
+      background-color: #000814;
+      color: white;
+      font-weight: bold;
+    }
+    .speech-bubble {
+      max-width: 700px;
+      margin: 1.5rem auto;
+      background-color: white;
+      color: #000814;
+      padding: 1.5rem 2rem;
+      border-radius: 1rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    .progress-container {
+      width: 80%;
+      background: #333;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 20px;
+      margin: 1rem auto;
+    }
+    .progress-bar {
+      background: gold;
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s;
+    }
     .dashboard {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -35,7 +65,6 @@
       padding: 2rem;
       justify-items: center;
     }
-
     .lesson-button {
       background-color: #001d3d;
       color: gold;
@@ -51,46 +80,10 @@
       justify-content: center;
       box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
       transition: transform 0.2s ease;
+      cursor: pointer;
     }
-
     .lesson-button:hover {
       transform: scale(1.1);
-    }
-
-    .status-bar {
-      display: flex;
-      justify-content: space-around;
-      padding: 1rem;
-      background-color: #000814;
-      color: white;
-      font-weight: bold;
-    }
-
-    .speech-bubble {
-      max-width: 700px;
-      margin: 1.5rem auto;
-      background-color: white;
-      color: #000814;
-      padding: 1.5rem 2rem;
-      border-radius: 1rem;
-      font-weight: bold;
-      text-align: center;
-    }
-
-    .progress-container {
-      width: 80%;
-      background: #333;
-      border-radius: 20px;
-      overflow: hidden;
-      height: 20px;
-      margin: 1rem auto;
-    }
-
-    .progress-bar {
-      background: gold;
-      height: 100%;
-      width: 0%;
-      transition: width 0.4s;
     }
   </style>
 </head>
@@ -101,7 +94,7 @@
   <div class="status-bar">
     <div id="streakCounter">🔥 Streak: 0 days</div>
     <div id="hearts">❤️❤️❤️❤️❤️</div>
-    <div id="vipStatus">🆓</div>
+    <div id="vipStatus">FREE</div>
   </div>
   <div class="speech-bubble" id="dojeeSpeech">
     "If you skip studying again... I'm writing a poem about your failure."
@@ -116,20 +109,23 @@
     <div class="lesson-button" onclick="showVIPComingSoon()">VIP</div>
   </div>
 
+  <!-- Audio elements for sound effects -->
   <audio id="successSound" src="success.mp3"></audio>
   <audio id="failSound" src="fail.mp3"></audio>
   <audio id="trumpetSound" src="trumpet.mp3"></audio>
 
   <script>
+    // Initialize variables (if you want limited hearts, ensure localStorage is cleared)
     let streak = parseInt(localStorage.getItem('dojeeStreak')) || 0;
     let lastStudyDate = localStorage.getItem('dojeeLastStudy') || null;
     let hearts = parseInt(localStorage.getItem('dojeeHearts')) || 5;
+    // Force non-VIP for testing unless unlocked
     let isVIP = localStorage.getItem('dojeeVIP') === 'true';
-
+    
     function getTodayDate() {
       return new Date().toISOString().split('T')[0];
     }
-
+    
     function updateHearts() {
       const display = isVIP ? '♾️' : '❤️'.repeat(hearts);
       document.getElementById('hearts').innerText = display;
@@ -137,44 +133,43 @@
         document.getElementById('dojeeSpeech').innerText = "You're out of hearts! No more studying for today.";
       }
     }
-
+    
     function updateStreakDisplay() {
       document.getElementById('streakCounter').innerText = `🔥 Streak: ${streak} day${streak === 1 ? '' : 's'}`;
     }
-
+    
     function updateProgressBar(percentage) {
       document.getElementById('progressBar').style.width = percentage + '%';
     }
-
+    
     const today = getTodayDate();
     if (lastStudyDate !== today) {
       localStorage.setItem('dojeeLastStudy', today);
+      // Reset hearts on new day
+      hearts = 5;
+      localStorage.setItem('dojeeHearts', hearts);
     }
-
+    
     updateStreakDisplay();
     updateHearts();
-
+    
     function increaseStreak() {
+      // Increase streak only if user visits on a new day
       const lastDate = localStorage.getItem('dojeeLastStudy');
-      const now = new Date();
-      const then = new Date(lastDate);
-      const diff = (now - then) / (1000 * 60 * 60 * 24);
-
-      if (diff >= 1) {
+      if (lastDate !== today) {
         streak++;
         localStorage.setItem('dojeeStreak', streak);
-        localStorage.setItem('dojeeLastStudy', getTodayDate());
+        localStorage.setItem('dojeeLastStudy', today);
         updateStreakDisplay();
       }
     }
-
+    
     function startLesson(subject) {
       if (!isVIP && hearts <= 0) {
         document.getElementById('dojeeSpeech').innerText = "No hearts left! Come back tomorrow or go VIP.";
         document.getElementById('failSound').play();
         return;
       }
-
       document.getElementById('dojeeSpeech').innerText = `Starting your ${subject} lesson! Time to slay.`;
       document.getElementById('successSound').play();
       increaseStreak();
@@ -183,10 +178,11 @@
         localStorage.setItem('dojeeHearts', hearts);
       }
       updateHearts();
+      // Update progress bar per lesson start (for demo, set to 33% per lesson)
       updateProgressBar(33);
       window.location.href = `${subject}-lesson.html`;
     }
-
+    
     function showVIPComingSoon() {
       document.getElementById('dojeeSpeech').innerText = "VIP coming soon! You'll be able to slay with AI soon.";
     }
