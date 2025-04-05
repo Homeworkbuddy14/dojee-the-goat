@@ -148,18 +148,22 @@
 
     const today = getTodayDate();
     if (lastStudyDate !== today) {
-      hearts = 5;
-      localStorage.setItem('dojeeHearts', hearts);
+      localStorage.setItem('dojeeLastStudy', today);
     }
 
     updateStreakDisplay();
     updateHearts();
 
     function increaseStreak() {
-      if (lastStudyDate !== today) {
+      const lastDate = localStorage.getItem('dojeeLastStudy');
+      const now = new Date();
+      const then = new Date(lastDate);
+      const diff = (now - then) / (1000 * 60 * 60 * 24);
+
+      if (diff >= 1) {
         streak++;
         localStorage.setItem('dojeeStreak', streak);
-        localStorage.setItem('dojeeLastStudy', today);
+        localStorage.setItem('dojeeLastStudy', getTodayDate());
         updateStreakDisplay();
       }
     }
@@ -179,7 +183,7 @@
         localStorage.setItem('dojeeHearts', hearts);
       }
       updateHearts();
-      updateProgressBar(33); // You can change this logic to match lesson progress
+      updateProgressBar(33);
       window.location.href = `${subject}-lesson.html`;
     }
 
