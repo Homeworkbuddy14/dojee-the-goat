@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reading Lesson - Dojee</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      background-color: #000814;
+      color: white;
+      font-family: 'Kanit', sans-serif;
+      padding: 2rem;
+    }
+    .story-box {
+      background-color: #001d3d;
+      border: 2px solid gold;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+    }
+    .question-box {
+      background-color: #001d3d;
+      border: 2px solid gold;
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+    .btn-gold {
+      background-color: gold;
+      color: #000814;
+      font-weight: bold;
+      border: none;
+    }
+    .btn-gold:hover {
+      background-color: #ffd700;
+    }
+    .progress-container {
+      width: 100%;
+      background: #333;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 20px;
+      margin-bottom: 1rem;
+    }
+    .progress-bar {
+      background: gold;
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="text-center mb-4">📚 Reading Lesson</h1>
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="story-box">
+    <p>
+      Once upon a time, in a land ruled by homework and tests, there lived a goat named Dojee. He wore a sparkly jacket and helped kids learn with sass and sparkles. Every day, he guided students through reading, math, and English, and rewarded them with praise when they powered through. But if they skipped studying? Oh honey, they'd hear about it.
+    </p>
+  </div>
+
+  <div class="question-box">
+    <p><strong>Question:</strong> What does Dojee wear?</p>
+    <input type="text" id="answer" class="form-control mb-2" placeholder="Type your answer here..." />
+    <button class="btn btn-gold" onclick="checkAnswer()">Submit</button>
+    <p id="feedback" class="mt-2"></p>
+  </div>
+
+  <audio id="successSound" src="success.mp3"></audio>
+  <audio id="failSound" src="fail.mp3"></audio>
+  <audio id="trumpetSound" src="trumpet.mp3"></audio>
+
+  <script>
+    let hearts = parseInt(localStorage.getItem('dojeeHearts')) || 5;
+    let isVIP = localStorage.getItem('dojeeVIP') === 'true';
+    let progress = 0;
+
+    function updateProgressBar() {
+      document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    function checkAnswer() {
+      const answer = document.getElementById('answer').value.toLowerCase();
+      const feedback = document.getElementById('feedback');
+      if (answer.includes('sparkly jacket')) {
+        document.getElementById('successSound').play();
+        feedback.innerText = "Correct! Dojee approves 💅";
+        progress = 100;
+        updateProgressBar();
+        document.getElementById('trumpetSound').play();
+        setTimeout(() => alert("Lesson Complete! 🎉"), 500);
+      } else {
+        document.getElementById('failSound').play();
+        feedback.innerText = "Uhhm... study much? Try again.";
+        if (!isVIP) {
+          hearts = Math.max(hearts - 1, 0);
+          localStorage.setItem('dojeeHearts', hearts);
+        }
+        if (!isVIP && hearts === 0) {
+          alert("You're out of hearts! Come back tomorrow.");
+          window.location.href = 'index.html';
+        }
+      }
+    }
+
+    updateProgressBar();
+  </script>
+</body>
+</html>
