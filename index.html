@@ -1,114 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dojee - Homework Buddy</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Header with Dojee's Branding -->
-  <header>
-    <div class="header-container">
-      <h1>Welcome to Dojee's Homework Buddy!</h1>
-      <img src="https://example.com/dojee-logo.png" alt="Dojee Logo" class="dojee-logo">
-    </div>
-  </header>
+/* Import fonts for a bold, fun vibe */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-  <!-- Login/Signup Section (will appear when not logged in) -->
-  <div id="login-signup-container">
-    <!-- Login Form -->
-    <div id="login-form">
-      <h3 class="form-title">Login</h3>
-      <input type="email" id="login-email" placeholder="Email" required>
-      <input type="password" id="login-password" placeholder="Password" required>
-      <button onclick="login()" class="button">Login</button>
-      <p>Don't have an account? <a href="#" onclick="toggleForms()" class="link">Sign up</a></p>
-    </div>
+/* General Body Styles */
+body {
+  background: url('https://i.ibb.co/8sxh4mB/273823017-509077803907723-6416935877065860623-n-1.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Bebas Neue', cursive;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
 
-    <!-- Signup Form -->
-    <div id="signup-form" style="display: none;">
-      <h3 class="form-title">Sign Up</h3>
-      <input type="email" id="signup-email" placeholder="Email" required>
-      <input type="password" id="signup-password" placeholder="Password" required>
-      <button onclick="signup()" class="button">Sign Up</button>
-      <p>Already have an account? <a href="#" onclick="toggleForms()" class="link">Login</a></p>
-    </div>
-  </div>
+header {
+  text-align: center;
+  padding: 50px;
+}
 
-  <!-- Lessons Section (visible after login) -->
-  <div id="lesson-section" style="display: none;">
-    <h2>Choose your lesson, darling!</h2>
-    <div id="lessons">
-      <button onclick="startLesson('math')" class="lesson-button">Start Math Lesson</button>
-      <button onclick="startLesson('reading')" class="lesson-button">Start Reading Lesson</button>
-      <button onclick="startLesson('english')" class="lesson-button">Start English Lesson</button>
-    </div>
-  </div>
+header h1 {
+  font-size: 3em;
+  color: deeppink;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
 
-  <!-- Footer Section -->
-  <footer>
-    <p>Powered by Dojee &copy; 2025</p>
-  </footer>
+.dojee-logo {
+  width: 200px;
+  margin-top: 20px;
+}
 
-  <!-- JavaScript for Interactivity -->
-  <script>
-    let users = []; // Simulating user data
+h2, h3 {
+  color: deeppink;
+  text-align: center;
+}
 
-    // Toggle between Login and Signup forms
-    function toggleForms() {
-      const loginForm = document.getElementById("login-form");
-      const signupForm = document.getElementById("signup-form");
+h3.form-title {
+  font-size: 2em;
+  color: #ff00b3;
+}
 
-      if (loginForm.style.display === "none") {
-        loginForm.style.display = "block";
-        signupForm.style.display = "none";
-      } else {
-        loginForm.style.display = "none";
-        signupForm.style.display = "block";
-      }
-    }
+#login-form, #signup-form {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 20px auto;
+}
 
-    // Signup function
-    function signup() {
-      const email = document.getElementById("signup-email").value;
-      const password = document.getElementById("signup-password").value;
+input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  width: 100%;
+  border: none;
+  background-color: #fff;
+  color: #ff00b3;
+  font-size: 1.2em;
+}
 
-      if (email && password) {
-        users.push({ email, password });
-        alert("Account created! Now, login.");
-        toggleForms(); 
-      } else {
-        alert("Please fill in all fields!");
-      }
-    }
+button {
+  background-color: #ff00b3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
 
-    // Login function
-    function login() {
-      const email = document.getElementById("login-email").value;
-      const password = document.getElementById("login-password").value;
+button:hover {
+  background-color: #ff3399;
+}
 
-      const user = users.find(u => u.email === email && u.password === password);
+#lessons {
+  text-align: center;
+  margin-top: 30px;
+}
 
-      if (user) {
-        alert("Login successful! Welcome!");
-        showLessons(); // Show lessons after successful login
-      } else {
-        alert("Invalid login. Please check your details.");
-      }
-    }
+.lesson-button {
+  background-color: #ff00b3;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin: 10px;
+}
 
-    // Show lessons section after successful login
-    function showLessons() {
-      document.getElementById("lesson-section").style.display = "block";
-      document.getElementById("login-signup-container").style.display = "none";
-    }
+.lesson-button:hover {
+  background-color: #ff3399;
+}
 
-    // Start a lesson (dummy function for now)
-    function startLesson(subject) {
-      alert(`Starting ${subject} lesson!`);
-      // Here you can link to your actual lesson system
-    }
-  </script>
-</body>
-</html>
+footer {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  color: white;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Fun links */
+a.link {
+  color: #ff00b3;
+  text-decoration: none;
+}
+
+a.link:hover {
+  color: #ff3399;
+}
