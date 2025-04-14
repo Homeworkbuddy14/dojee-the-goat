@@ -1,49 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dojee's Fashion World</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dojee - Homework Buddy</title>
+  
+  <!-- Diva Style CSS -->
   <style>
-    /* Sparkly background with a leopard print overlay */
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
     body {
-      margin: 0;
-      font-family: 'Outfit', sans-serif;
-      background: 
-        url('https://www.transparenttextures.com/patterns/paper_ruffles.png'),
-        linear-gradient(135deg, #f06595, #e080b4);
-      color: #fff;
-      padding: 0 20px;
+      background: url('https://i.ibb.co/8sxh4mB/273823017-509077803907723-6416935877065860623-n-1.jpg') no-repeat center center fixed;
       background-size: cover;
-    }
-
-    /* Keyframes for an animated sparkle effect */
-    @keyframes sparkle {
-      0%   { filter: brightness(1); }
-      50%  { filter: brightness(1.5); }
-      100% { filter: brightness(1); }
-    }
-
-    /* Header: Big Diva Energy with animated sparkles */
-    header {
+      font-family: 'Bebas Neue', cursive;
+      color: white;
+      margin: 0;
+      padding: 0;
       text-align: center;
-      margin-bottom: 2rem;
-      padding-top: 3rem;
-      animation: sparkle 3s infinite;
     }
-
-    header h1 {
-      font-size: 3.5rem;
-      color: #ff77a9;
-      text-shadow: 4px 4px 12px rgba(255, 255, 255, 0.8);
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
+    h1 {
+      font-size: 5rem;
+      color: deeppink;
+      text-shadow: 3px 3px 5px #000000;
     }
+    h3 {
+      font-size: 2rem;
+      color: #ff0099;
+    }
+    #login-signup-container {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 15px;
+      padding: 30px;
+      width: 300px;
+      margin: 50px auto;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 2px solid #ff0099;
+      font-size: 1.2rem;
+    }
+    button {
+      background-color: #ff0099;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff66b2;
+    }
+    p {
+      font-size: 1.2rem;
+      color: #ff0099;
+    }
+    a {
+      color: #ff0099;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 50px;
+      padding: 10px;
+      background: #ff0099;
+      color: white;
+      font-size: 1.2rem;
+      border-top: 2px solid #fff;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Dojee's Homework Buddy!</h1>
 
-    header p {
-      color: #ffedff;
-      font-size: 1.5rem;
-      text-shadow
+  <!-- Login/Signup Form -->
+  <div id="login-signup-container">
+    <!-- Login Form -->
+    <div id="login-form">
+      <h3>Login</h3>
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Password" required>
+      <button onclick="login()">Login</button>
+      <p>Don't have
