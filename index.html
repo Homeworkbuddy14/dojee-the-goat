@@ -1,181 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dojee's World</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dojee's Fashion World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
+    /* Sparkly background with a leopard print overlay */
     body {
       margin: 0;
       font-family: 'Outfit', sans-serif;
-      background: url('https://www.transparenttextures.com/patterns/sparkle.png'), linear-gradient(to bottom, #f06595, #d1a6d8);
-      color: white;
-      padding: 20px;
+      background: 
+        url('https://www.transparenttextures.com/patterns/paper_ruffles.png'),
+        linear-gradient(135deg, #f06595, #e080b4);
+      color: #fff;
+      padding: 0 20px;
+      background-size: cover;
     }
 
+    /* Keyframes for an animated sparkle effect */
+    @keyframes sparkle {
+      0%   { filter: brightness(1); }
+      50%  { filter: brightness(1.5); }
+      100% { filter: brightness(1); }
+    }
+
+    /* Header: Big Diva Energy with animated sparkles */
     header {
       text-align: center;
       margin-bottom: 2rem;
+      padding-top: 3rem;
+      animation: sparkle 3s infinite;
     }
 
     header h1 {
-      font-size: 3rem;
-      color: #f8a6c1;
-      text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.6);
+      font-size: 3.5rem;
+      color: #ff77a9;
+      text-shadow: 4px 4px 12px rgba(255, 255, 255, 0.8);
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
     }
 
     header p {
       color: #ffedff;
-      font-size: 1.25rem;
-      text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.3);
-    }
-
-    .dojee-popup {
-      background-color: rgba(0, 0, 0, 0.7);
-      max-width: 500px;
-      margin: 0 auto 2rem;
-      border-radius: 1.5rem;
-      padding: 1rem;
-      box-shadow: 0 0 20px #ff66b2;
-      font-size: 1.2rem;
-      text-align: center;
-      font-weight: bold;
-      color: #ffb3ff;
-      background: url('https://www.transparenttextures.com/patterns/leopard.png');
-    }
-
-    .lesson-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      max-width: 900px;
-      margin: 0 auto 2rem;
-    }
-
-    @media (min-width: 640px) {
-      .lesson-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .lesson-card {
-      background-color: #4b3b6a;
-      border-radius: 1.5rem;
-      padding: 1rem;
-      box-shadow: 0 0 15px #00000044;
-      text-align: center;
-      background: url('https://www.transparenttextures.com/patterns/leopard.png');
-      background-size: 60px 60px;
-    }
-
-    .lesson-card h2 {
-      color: #f8a6c1;
       font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    .lesson-card button {
-      width: 100%;
-      padding: 0.6rem;
-      border: none;
-      border-radius: 1rem;
-      background-color: #ff66b2;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.6);
-    }
-
-    .lesson-card button:hover {
-      background-color: #ff80bf;
-      transform: scale(1.05);
-    }
-
-    .footer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 900px;
-      margin: 0 auto;
-      gap: 1rem;
-    }
-
-    @media (min-width: 640px) {
-      .footer {
-        flex-direction: row;
-      }
-    }
-
-    .streak {
-      color: #ffdd57;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .footer button {
-      padding: 0.6rem 1rem;
-      border-radius: 1rem;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .login-btn {
-      background-color: #f8a6c1;
-      color: #1a1333;
-    }
-
-    .vip-btn {
-      background-color: #ffdd57;
-      color: black;
-    }
-
-    .vip-btn:hover {
-      background-color: #ffe97b;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>Welcome to Dojee's World!</h1>
-    <p>Your daily dose of sass, smarts, and study power 💅🐐</p>
-  </header>
-
-  <div class="dojee-popup">
-    ✨ Dojee says: "Back again? Somebody's feelin' smart today!" ✨
-  </div>
-
-  <div class="lesson-grid">
-    <div class="lesson-card">
-      <h2>📘 Reading</h2>
-      <button onclick="location.href='reading-lesson.html'">Start Reading</button>
-    </div>
-    <div class="lesson-card">
-      <h2>🔤 English</h2>
-      <button onclick="location.href='english-lesson.html'">Start English</button>
-    </div>
-    <div class="lesson-card">
-      <h2>➗ Math</h2>
-      <button onclick="location.href='math-lesson.html'">Start Math</button>
-    </div>
-  </div>
-
-  <div class="footer">
-    <div class="streak">
-      <span>🔥 Streak: 3 days</span>
-    </div>
-    <div class="footer-buttons">
-      <button class="login-btn">Login</button>
-      <button class="vip-btn">Get VIP</button>
-    </div>
-  </div>
-
-</body>
-</html>
+      text-shadow
